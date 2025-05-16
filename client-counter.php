@@ -1,5 +1,5 @@
 <section class="fun-fact-section">
-            <div class="outer-box" style="background-image: url(images/background/3.jpg);">
+            <div class="outer-box" style="background-image: url(https://www.shutterstock.com/image-vector/elegant-black-background-vector-illustration-600nw-2120848574.jpg);">
                 <div class="auto-container">
                     <div class="fact-counter">
                         <div class="row">

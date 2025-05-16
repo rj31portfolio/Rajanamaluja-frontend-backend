@@ -41,11 +41,11 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
         <div class="auto-container">
             <div class="inner-container clearfix">
                 <div class="title-box">
-                    <h1>Youtube Studio</h1>                   
+                    <h1>Youtube Studio Gallary</h1>                   
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="index.php">Home</a></li>
-                    <li>Youtube Studio</li>
+                    <li>Youtube Studio Gallary</li>
                 </ul>
             </div>
         </div>
@@ -56,7 +56,7 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
             <div class="upper-box">
                 <div class="auto-container">    
                     <div class="sec-title text-center light">
-                        <h2 class="add-more-txt-sub-head-new">Youtube Studio</h2>
+                        <h2 class="add-more-txt-sub-head-new">Youtube Studio Gallary</h2>
                     </div>
                 </div>
             </div>            

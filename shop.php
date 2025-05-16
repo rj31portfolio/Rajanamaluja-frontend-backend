@@ -33,7 +33,8 @@
                 </form>
             </div>
         </div>
-    </section><div id="carouselExampleControls" class="carousel slide banner-section" data-ride="carousel">
+    </section>
+    <div id="carouselExampleControls" class="carousel slide banner-section" data-ride="carousel">
                 <div class="carousel-inner"><div class="carousel-item active">
                                         <img class="d-block w-100" src="https://web.archive.org/web/20240815082219im_/https://www.rajanmaluujaarts.com/images/upload/product/banner/1709532879.jpg" alt="Banner 1">
                                     </div><div class="carousel-item">
@@ -263,7 +264,6 @@
                                 </div>
                                 
                             </div>
-                        </div></div>
             </div>
         </div>
     </div>
@@ -580,15 +580,6 @@
                     </div>
                 </div>
             </div></section>
-
-                    
-
-
-
-
-	
-
-	
 
 	<section class="fun-fact-and-features" style="background-image: url(/web/20240815082219im_/https://www.rajanmaluujaarts.com/images/background/3.jpg);">
         <div class="outer-box">

@@ -46,7 +46,7 @@ $paintings = $stmt->fetchAll();
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color:rgb(226, 221, 221);
         }
         .container {
             max-width: 1200px;
@@ -113,6 +113,7 @@ $paintings = $stmt->fetchAll();
     </style>
 </head>
 <body>
+  
     <div class="container">
         <h1><?php echo htmlspecialchars($category['name']); ?></h1>
         <div class="paintings-list">
@@ -130,5 +131,6 @@ $paintings = $stmt->fetchAll();
             <?php endif; ?>
         </div>
     </div>
+    
 </body>
 </html>

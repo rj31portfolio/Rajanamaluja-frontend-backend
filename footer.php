@@ -23,14 +23,13 @@
                                         <p class="widget-title">Useful links</p>
                                         <div class="widget-content">
                                             <ul class="list">
-                                                <li class=''><a href=''>Home</a></li>
-                                                <li class=''><a href='about-us.php'>About Us</a></li>
-                                                <li class=''><a href='our-portfolio.php'>Our Portfolio</a></li>
-                                                <li class=''><a href='news-and-magazine-gallery.php'>News & Magazine</a></li>
-                                                <li class=''><a href='youtube-studio.php'>Video Gallery</a></li>
-                                                <li class=''><a href='blogs.php'>Our Blogs</a></li>
+                                                <li class=''><a href='index.php'>Home</a></li>
+                                                <li class=''><a href='about.php'>About Us</a></li>
+            
+                                                <li class=''><a href='video-Gallary.php'>Video Gallery</a></li>
+                                
                                                 <li class=''><a href='contact-us.php'>Contact Us</a></li>
-                                                <li class=''><a href='shipping.php'>Shipping</a></li>
+                                                <!-- <li class=''><a href='shipping.php'>Shipping</a></li> -->
                                                 <li class=''><a href='privacy-policy.php'>Privacy Policy</a></li>
                                                 <li class=''><a href='return-policy.php'>Return Policy</a></li>
                                                 <li class=''><a href='terms-of-conditions.php'>Terms & Conditions</a></li>
@@ -46,22 +45,25 @@
                         <div class="big-column col-xl-5 col-lg-12 col-md-12 col-sm-12">
                             <div class="row clearfix">
                                 <div class="footer-column col-xl-5 col-lg-6 col-md-6 col-sm-12">
+                                    <?php
+                                    require_once 'includes/db.php';
+
+                                    // Fetch categories from the database (limit to 10)
+                                    $stmt = $pdo->query("SELECT name, slug FROM categories ORDER BY name ASC LIMIT 8");
+                                    $categories = $stmt->fetchAll();
+                                    ?>
+
                                     <div class="footer-widget links-widget">
                                         <p class="widget-title">Our Services</p>
                                         <div class="widget-content">
                                             <ul class="list">
-                                                <li><a href='top-portrait-painting-artist-india.php'>Portrait Painting</a></li>
-                                                <li><a href='coloured-sketch-artist-delhi.php'>Coloured Sketch</a></li>
-                                                <li><a href='charcoal-sketch-artist-delhi.php'>Charcoal Sketch</a></li>
-                                                <li><a href='illustration-drawing-artist-delhi.php'>Illustration & Drawing</a></li>
-                                                <li><a href='tanjore-painting-artist-delhi.php'>Tanjore Painting</a></li>
-                                                <li><a href='sculpture-drawing-artist-delhi.php'>Sculpture Drawing</a></li>
-                                                <li><a href='relief-artwork-artist-delhi.php'>Relief Artwork</a></li>
-                                                <li><a href='handmade-caritcature-artist-delhi.php'>Handmade Caricature</a></li>
-                                                <li><a href='pencil-sketch-artist-delhi.php'>Pencil Sketch Artist</a></li>
-                                                <li><a href='best-wall-art-artist-delhi.php'>Wall Artists</a></li>
-                                                <li><a href='couple-portrait-painting-artist-delhi.php'>Couple Portrait Painting</a></li>
-                                                <li><a href='divine-painting-artist-delhi.php'>Divine Portrait Painting</a></li>
+                                                <?php foreach ($categories as $category): ?>
+                                                    <li>
+                                                        <a href="category.php?slug=<?php echo htmlspecialchars($category['slug']); ?>">
+                                                            <?php echo htmlspecialchars($category['name']); ?>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -77,6 +79,12 @@
                                                     <input type="text" name="name" placeholder="Enter Your Name" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 &&  event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)"
                                                         required="">
                                                 </div>
+                                                <div class="form-group">
+    <input type="email" name="email" placeholder="Enter Your Email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        required>
+</div>
+
                                                 <div class="form-group">
                                                     <input type="text" name="phone" placeholder="Enter Your Mobile" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))"
                                                         pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required="">
@@ -179,6 +187,11 @@
                                                 <input type="text" class="form-control name" id="popup-contact-name" name="name" placeholder="Your Name*" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 &&  event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)"
                                                     required="">
                                                 <span class="error-message" id="popup-name-error"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="tel" class="form-control mobile" id="popup-contact-phone" name="phone" placeholder="Mobile No.*" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))"
+                                                    pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required="">
+                                                <span class="error-message" id="popup-phone-error"></span>
                                             </div>
                                             <div class="form-group">
                                                 <input type="tel" class="form-control mobile" id="popup-contact-phone" name="phone" placeholder="Mobile No.*" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))"

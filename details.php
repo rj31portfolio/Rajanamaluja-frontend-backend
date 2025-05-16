@@ -1,4 +1,6 @@
-<?php 
+<?php
+//session_start(); // Start the session at the very beginning
+
 require_once('head.php');
 require_once 'includes/db.php';
 
@@ -10,8 +12,7 @@ if (empty($slug)) {
     echo "<div class='error-container'>
             <h2>Invalid Art Slug</h2>
             <p>The art slug provided is invalid.</p>
-            <a href='index.php' class='btn-home'>Go back to Home</a>
-          </div>";
+            <a href='index.php' class='btn-home'>Go back to Home</a>";
     exit();
 }
 
@@ -37,8 +38,7 @@ try {
         echo "<div class='error-container'>
                 <h2>Art not found</h2>
                 <p>The art you are looking for does not exist or has been removed.</p>
-                <a href='index.php' class='btn-home'>Go back to Home</a>
-              </div>";
+                <a href='index.php' class='btn-home'>Go back to Home</a>";
         exit();
     }
 
@@ -61,8 +61,7 @@ try {
     echo "<div class='error-container'>
             <h2>Database Error</h2>
             <p>Sorry, we're experiencing technical difficulties.</p>
-            <a href='index.php' class='btn-home'>Go back to Home</a>
-          </div>";
+            <a href='index.php' class='btn-home'>Go back to Home</a>";
     exit();
 }
 
@@ -70,7 +69,15 @@ try {
 $mainImage = !empty($art['main_image']) ? $baseImagePath . htmlspecialchars($art['main_image']) : 'images/default.png';
 $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($art['main_image_2']) : null;
 ?>
-
+<style>
+    .alert-success {
+        padding: 10px 15px;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+    }
+</style>
 <div class="page-wrapper">    
     <?php require_once('header.php'); ?>
     
@@ -150,7 +157,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                             </div>
                             
                             <!-- Art Details Specifications -->
-                            <div class="art-specifications">
+                            <div class="art-specification text-dark">
                                 <h3>Artwork Details</h3>
                                 <ul>
                                     <?php if (!empty($art['size'])): ?>
@@ -261,7 +268,14 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                         <!-- Enquiry Form Widget -->
                         <div class="sidebar-widget brochure-widget add-side-bg-new">
                             <h3 class="sidebar-title">Enquire Now</h3>
-                            <form method="post" action="sms.php" class="enquiry-form">       
+                            <form method="post" action="sms.php" class="enquiry-form">
+                                <?php
+                               // session_start(); // Start the session to access the success message
+                                if (isset($_SESSION['success'])) {
+                                    echo "<div class='alert alert-success' style='margin-bottom: 20px;'>" . htmlspecialchars($_SESSION['success']) . "</div>";
+                                    unset($_SESSION['success']); // Clear the message after displaying it
+                                }
+                                ?>
                                 <div class="form-group">
                                     <input type="text" name="name" placeholder="Enter Your Name" class="form-control input" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
                                 </div>
@@ -284,7 +298,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                             <ul class="contact-info">
                                 <li>
                                     <span class="icon flaticon-phone-call"></span>
-                                    <a href="tel:+911234567890">+91 1234567890</a>
+                                    <a href="tel:+911234567890">+91-9136165775</a>
                                 </li>
                                 <li>
                                     <span class="icon flaticon-email"></span>

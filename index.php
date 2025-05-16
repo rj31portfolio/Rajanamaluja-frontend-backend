@@ -40,18 +40,16 @@
         </section>
 <section class="banner-section">
   <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-    <iframe 
-      src="https://www.youtube.com/embed/hJ9_xmvnbOk?autoplay=1&mute=0&controls=0&loop=1&playlist=hJ9_xmvnbOk&modestbranding=1&rel=0" 
-      frameborder="0" 
-      allow="autoplay; encrypted-media" 
-      allowfullscreen 
-      style="position: absolute; top:0; left:0; width:100%; height:100%;">
-    </iframe>
+    <video 
+      src="0.2 (2).mp4" 
+      autoplay 
+      muted 
+      playsinline 
+      style="position: absolute; top:0; left:0; width:100%; height:100%;" 
+      controls="false">
+    </video>
   </div>
 </section>
-
-
-
 
 
 
