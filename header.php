@@ -66,6 +66,7 @@ $categories = $stmt->fetchAll();
                                 </li>
                                 
                                 <!-- Account Dropdown with Toggle -->
+                                <?php if (isLoggedIn()): ?>
                                 <li class="dropdown">
                                     <div class="account-dropdown-wrapper">
                                         <button class="btn btn-secondary add-bg-new-account-dro-menu account-toggle" 
@@ -76,19 +77,24 @@ $categories = $stmt->fetchAll();
                                             Account <i class="fa fa-chevron-down"></i>
                                         </button>
                                         <ul class="account-dropdown-menu">
-                                            <?php if (isLoggedIn()): ?>
-                                                <li><a href="<?php echo BASE_URL; ?>cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                                <li><a href="<?php echo BASE_URL; ?>wishlist.php"><i class="fa fa-heart"></i> Wishlist</a></li>
-                                                <li><a href="<?php echo BASE_URL; ?>order-history.php"><i class="fa fa-history"></i> Orders</a></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><a href="<?php echo BASE_URL; ?>logout.php" class="text-danger"><i class="fa fa-sign-out"></i> Logout</a></li>
-                                            <?php else: ?>
-                                                <li><a href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Login</a></li>
-                                                <li><a href="<?php echo BASE_URL; ?>register.php"><i class="fa fa-user-plus"></i> Register</a></li>
-                                            <?php endif; ?>
+                                            <li><a href="<?php echo BASE_URL; ?>cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                            <li><a href="<?php echo BASE_URL; ?>wishlist.php"><i class="fa fa-heart"></i> Wishlist</a></li>
+                                            <li><a href="<?php echo BASE_URL; ?>order-history.php"><i class="fa fa-history"></i> Orders</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a href="<?php echo BASE_URL; ?>logout.php" class="text-danger"><i class="fa fa-sign-out"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
+                                <?php else: ?>
+                                <li class="d-flex align-items-center gap-2" style="gap:10px;">
+                                    <a href="<?php //echo BASE_URL; ?>login.php" class="btn btn-outline-primary btn-sm px-3 me-1" style="font-weight:600;">
+                                        <i class="fa fa-sign-in"></i> Login
+                                    </a>
+                                    <a href="<?php //echo BASE_URL; ?>register.php" class="btn btn-primary btn-sm px-3" style="font-weight:600;">
+                                        <i class="fa fa-user-plus"></i> Register
+                                    </a>
+                                </li>
+                                <?php endif; ?>
                                 
                                 <li>
                                     <button class="btn btn-secondary add-bg-new-account-dro-menu" type="button">

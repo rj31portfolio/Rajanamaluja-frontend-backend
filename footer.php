@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="copyright-text">
-                            <p>Copyright © 2023 <a href="#">Rajan Maaluja Arts</a> All right reserved | Designed & Developed by : <a href="http://viraladsmedia.com/" target="_blank">Viral Ads Media</a></p>
+                            <p>Copyright © 2023 <a href="#">Rajan Maaluja Arts</a> All right reserved <!--| Designed & Developed by : <a href="http://viraladsmedia.com/" target="_blank">Viral Ads Media</a></p> -->
                         </div>
                     </div>
                 </div>
