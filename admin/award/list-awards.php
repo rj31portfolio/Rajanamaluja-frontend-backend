@@ -1,5 +1,6 @@
 <?php
 require_once '../includes/db.php';
+require_once '../../includes/config.php'; // Add this line
 
 // Fetch all awards
 $awards = $pdo->query("SELECT * FROM awards ORDER BY created_at DESC")->fetchAll();
@@ -16,8 +17,9 @@ $awards = $pdo->query("SELECT * FROM awards ORDER BY created_at DESC")->fetchAll
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4 text-center">Manage Awards</h1>
-        <div class="d-flex justify-content-end mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="../dashboard.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back</a>
+            <h1 class="mb-0 text-center flex-grow-1">Manage Awards</h1>
             <a href="upload-award.php" class="btn btn-primary"><i class="bi bi-upload"></i> Upload New Award</a>
         </div>
         <table class="table table-bordered table-hover">
@@ -34,7 +36,7 @@ $awards = $pdo->query("SELECT * FROM awards ORDER BY created_at DESC")->fetchAll
                     <tr>
                         <td><?php echo $award['id']; ?></td>
                         <td>
-                            <img src="/artifyhub/assets/uploads/awards/<?php echo htmlspecialchars($award['image_path']); ?>" alt="<?php echo htmlspecialchars($award['title']); ?>" style="height: 50px;" class="img-thumbnail">
+                            <img src="<?php echo BASE_URL . 'assets/uploads/awards/' . htmlspecialchars($award['image_path']); ?>" alt="<?php echo htmlspecialchars($award['title']); ?>" style="height: 50px;" class="img-thumbnail">
                         </td>
                         <td><?php echo htmlspecialchars($award['title']); ?></td>
                         <td>

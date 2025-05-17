@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($image['tmp_name'], $imagePath)) {
             $stmt = $pdo->prepare("INSERT INTO awards (image_path, title) VALUES (?, ?)");
             $stmt->execute([basename($image['name']), $title]);
-            $successMessage = "Award uploaded successfully!";
+            header("Location: list-awards.php");
+            exit;
         } else {
             $errorMessage = "Failed to upload image.";
         }
