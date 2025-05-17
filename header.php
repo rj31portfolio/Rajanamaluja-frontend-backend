@@ -87,10 +87,10 @@ $categories = $stmt->fetchAll();
                                 </li>
                                 <?php else: ?>
                                 <li class="d-flex align-items-center gap-2" style="gap:10px;">
-                                    <a href="<?php //echo BASE_URL; ?>login.php" class="btn btn-outline-primary btn-sm px-3 me-1" style="font-weight:600;">
+                                    <a href="<?php echo BASE_URL; ?>login.php" class="btn btn-outline-primary btn-sm px-3 me-1" style="font-weight:600;">
                                         <i class="fa fa-sign-in"></i> Login
                                     </a>
-                                    <a href="<?php //echo BASE_URL; ?>register.php" class="btn btn-primary btn-sm px-3" style="font-weight:600;">
+                                    <a href="<?php echo BASE_URL; ?>register.php" class="btn btn-primary btn-sm px-3" style="font-weight:600;">
                                         <i class="fa fa-user-plus"></i> Register
                                     </a>
                                 </li>

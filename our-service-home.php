@@ -1,12 +1,26 @@
 <?php
-//require_once 'includes/functions.php';
 require_once 'includes/db.php';
 
 $category_slug = isset($_GET['category']) ? $_GET['category'] : '';
 $where = $category_slug ? "WHERE c.slug = ?" : "";
 $params = $category_slug ? [$category_slug] : [];
 
-$query = "SELECT a.*, c.name as category_name FROM arts a LEFT JOIN categories c ON a.category_id = c.id $where";
+$query = "
+SELECT 
+    a.*, 
+    c.name as category_name,
+    (
+        SELECT ai.image_path 
+        FROM art_images ai 
+        WHERE ai.art_id = a.id 
+        ORDER BY ai.created_at ASC 
+        LIMIT 1
+    ) AS art_image
+FROM arts a 
+LEFT JOIN categories c ON a.category_id = c.id 
+$where
+";
+
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $arts = $stmt->fetchAll();
@@ -31,13 +45,14 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
                     <?php
                         // Define the base path for images
                         $baseImagePath = 'assets/uploads/';
-                        $imagePath = !empty($art['main_image']) ? $baseImagePath . htmlspecialchars($art['main_image']) : 'images/defaulte.png';
+                        $imagePath = !empty($art['art_image']) 
+                            ? $baseImagePath . htmlspecialchars($art['art_image']) 
+                            : 'images/defaulte.png';
                     ?>
                     <div class='service-block'>
                         <div class='inner-box'>
                             <div class='image-box'>
                                 <figure class='image'>
-                                    <!-- Corrected link to use slug -->
                                     <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>' title='<?= htmlspecialchars($art['title']) ?>'>
                                         <img src='<?= $imagePath ?>' alt='<?= htmlspecialchars($art['title']) ?>'>
                                     </a>

@@ -40,97 +40,94 @@ $paintings = $stmt->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($category['name']); ?> - Paintings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css"> <!-- Add your CSS file -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color:rgb(226, 221, 221);
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .paintings-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        .painting-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .card {
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            border: none;
+            background: #fff;
+            opacity: 0;
+            animation: fadeInCard 0.7s forwards;
         }
-        .painting-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
         }
-        .painting-card img {
-            width: 100%;
-            height: 200px;
+        .card-img-top {
+            height: 220px;
             object-fit: cover;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
         }
-        .painting-card h3 {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            margin: 10px 0;
-            padding: 0 10px;
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 0;
         }
-        .painting-card a {
-            text-decoration: none;
-            color: inherit;
+        .card-body {
+            padding: 1rem 0.5rem 0.8rem 0.5rem;
+            background: #f8fafc;
         }
         .no-paintings {
             text-align: center;
-            font-size: 18px;
-            color: #666;
+            font-size: 20px;
+            color: #888;
+            margin-top: 40px;
         }
-        .btn-home {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+        .btn-home, .btn-primary {
+            border-radius: 25px;
+            padding: 10px 28px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            transition: background 0.2s;
         }
-        .btn-home:hover {
-            background-color: #0056b3;
+        .btn-home:hover, .btn-primary:hover {
+            background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+        }
+        @keyframes fadeInCard {
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-  
-    <div class="container">
-        <h1><?php echo htmlspecialchars($category['name']); ?></h1>
-        <div class="paintings-list">
+    <div class="container py-4">
+        <h1 class="text-center mb-4"><?php echo htmlspecialchars($category['name']); ?></h1>
+        <div class="row g-4">
             <?php if (!empty($paintings)): ?>
                 <?php foreach ($paintings as $painting): ?>
-                    <div class="painting-card">
-                        <a href="details.php?slug=<?php echo htmlspecialchars($painting['slug']); ?>">
-                            <img src="assets/uploads/<?php echo htmlspecialchars($painting['main_image']); ?>" alt="<?php echo htmlspecialchars($painting['title']); ?>">
-                            <h3><?php echo htmlspecialchars($painting['title']); ?></h3>
-                        </a>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <a href="details.php?slug=<?php echo htmlspecialchars($painting['slug']); ?>" class="text-decoration-none">
+                                <img src="assets/uploads/<?php echo htmlspecialchars($painting['main_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($painting['title']); ?>" style="height:220px;object-fit:cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center text-dark"><?php echo htmlspecialchars($painting['title']); ?></h5>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="no-paintings">No paintings found in this category.</p>
+                <div class="col-12">
+                    <p class="no-paintings text-center fs-5 text-muted">No paintings found in this category.</p>
+                </div>
             <?php endif; ?>
         </div>
+        <div class="text-center mt-4">
+            <a href="index.php" class="btn btn-primary">Go back to Home</a>
+        </div>
     </div>
-    
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL', 'http://localhost/artifyhub/');
+define('BASE_URL', 'http://localhost/rajmoorti/');
 define('ADMIN_URL', BASE_URL . 'admin/');
 define('UPLOAD_PATH', __DIR__ . '/../assets/uploads/');
 define('DB_HOST', 'localhost');

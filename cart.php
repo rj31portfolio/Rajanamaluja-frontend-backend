@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container my-5">
+<div class="container my-5 py-5">
     <h2 class="mb-4 text-center">Your Cart</h2>
     <?php if (count($cart_items) > 0): ?>
     <form method="post">

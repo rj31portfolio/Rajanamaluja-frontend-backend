@@ -125,13 +125,6 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                                         <img src="<?php echo $mainImage2; ?>" alt="<?php echo htmlspecialchars($art['title']); ?>"/>
                                     </figure>
                                     <?php endif; ?>
-                                    
-                                    <!-- Additional images -->
-                                    <?php foreach ($images as $image): ?>
-                                    <figure class="image">
-                                        <img src="<?php echo $baseImagePath . htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($art['title']); ?>"/>
-                                    </figure>
-                                    <?php endforeach; ?>
                                 </div>
                             </div>							
                             <h1 class="add-new-head-inenr-all"><?php echo htmlspecialchars($art['title']); ?></h1>
@@ -255,7 +248,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                             <?php foreach ($images as $image): ?>
                             <div class="col-6 col-md-4 mb-3">
                                 <div class="gallery-thumb border rounded p-2 h-100">
-                                    <img src="<?php echo $baseImagePath . htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($art['title']); ?>" class="img-fluid w-100" style="object-fit:cover;max-height:220px;">
+                                    <img src="<?php echo $baseImagePath . htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($art['title']); ?>" class="img-fluid w-100" style="object-fit:Contain;max-height:220px;">
                                 </div>
                             </div>
                             <?php endforeach; ?>
