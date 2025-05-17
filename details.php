@@ -246,6 +246,22 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
     </div>
 </section>
 <?php endif; ?>
+                    
+                    <!-- Gallery Section -->
+                    <?php if (!empty($images)): ?>
+                    <div class="art-gallery-section">
+                        <h3>Gallery Images</h3>
+                        <div class="row">
+                            <?php foreach ($images as $image): ?>
+                            <div class="col-6 col-md-4 mb-3">
+                                <div class="gallery-thumb border rounded p-2 h-100">
+                                    <img src="<?php echo $baseImagePath . htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($art['title']); ?>" class="img-fluid w-100" style="object-fit:cover;max-height:220px;">
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Sidebar Section -->
@@ -488,5 +504,24 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
     .art-block .price {
         color: #e83e8c;
         font-weight: bold;
+    }
+    
+    /* Additional styles for the gallery section */
+    .art-gallery-section {
+        margin-top: 40px;
+    }
+    
+    .gallery-thumb {
+        overflow: hidden;
+        border-radius: 4px;
+        position: relative;
+    }
+    
+    .gallery-thumb img {
+        transition: transform 0.3s;
+    }
+    
+    .gallery-thumb:hover img {
+        transform: scale(1.05);
     }
 </style>
