@@ -72,8 +72,9 @@ $orders = $pdo->query("SELECT o.*, u.name as customer_name FROM orders o JOIN us
                 </tbody>
             </table>
         </div>
-    </div>
+    
     <?php include '../includes/footer.php'; ?>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

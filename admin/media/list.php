@@ -101,8 +101,9 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
                 </table>
             </div>
         </div>
-    </div>
+   
     <?php include '../includes/footer.php'; ?>
+     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Toggle between grid and list views

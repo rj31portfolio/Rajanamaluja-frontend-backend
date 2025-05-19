@@ -33,7 +33,10 @@ $inquiries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4 text-center text-primary">Customer Enquiries</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary mb-0">Customer Enquiries</h2>
+        <a href="dashboard.php" class="btn btn-secondary">Back</a>
+    </div>
 
     <?php if (isset($_GET['deleted'])): ?>
         <div class="alert alert-success">Inquiry deleted successfully.</div>
