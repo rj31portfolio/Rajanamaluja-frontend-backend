@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <tr>
                         <td><?php echo $item['title']; ?></td>
                         <td><?php echo $item['quantity']; ?></td>
-                        <td>$<?php echo $item['price']; ?></td>
-                        <td>$<?php echo $item['price'] * $item['quantity']; ?></td>
+                        <td>₹<?php echo $item['price']; ?></td>
+                        <td>₹<?php echo $item['price'] * $item['quantity']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
