@@ -94,7 +94,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="services.php">Our Services</a></li>
+                    <li><a href="#">Our Services</a></li>
                     <?php if (!empty($art['category_name'])): ?>
                     <li><a href="details.php?slug=<?php echo htmlspecialchars($art['slug']); ?>">
                         <?php echo htmlspecialchars($art['category_name']); ?>
@@ -151,7 +151,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                             
                             <!-- Art Details Specifications -->
                             <div class="art-specification text-dark">
-                                <h3>Artwork Details</h3>
+                                <h3 class='text-light'>Artwork Details</h3>
                                 <ul>
                                     <?php if (!empty($art['size'])): ?>
                                     <li><strong>Size:</strong> <?php echo htmlspecialchars($art['size']); ?></li>
@@ -262,7 +262,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                     <aside class="sidebar services-sidebar">
                         <!-- Categories Widget -->
                         <div class="sidebar-widget sidebar-blog-category">
-                            <h3 class="sidebar-title">Our Services</h3>
+                            <h3 class="sidebar-title text-light">Our Services</h3>
                             <ul class="blog-cat">
                                 <?php foreach ($categories as $category): ?>
                                 <li>
@@ -303,7 +303,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                         
                         <!-- Quick Contact Widget -->
                         <div class="sidebar-widget contact-widget">
-                            <h3 class="sidebar-title">Quick Contact</h3>
+                            <h3 class="sidebar-title text-light">Quick Contact</h3>
                             <ul class="contact-info">
                                 <li>
                                     <span class="icon flaticon-phone-call"></span>
