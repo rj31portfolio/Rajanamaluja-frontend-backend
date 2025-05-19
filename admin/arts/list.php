@@ -141,7 +141,7 @@ unset($_SESSION['error']);
                         <td><?php echo $art['id']; ?></td>
                         <td><?php echo htmlspecialchars($art['title']); ?></td>
                         <td><?php echo htmlspecialchars($art['category_name'] ?: 'N/A'); ?></td>
-                        <td>$<?php echo number_format($art['price'], 2); ?></td>
+                        <td>₹<?php echo number_format($art['price'], 2); ?></td>
                         <td><?php echo $art['stock']; ?></td>
                         <td><?php echo ucfirst($art['status']); ?></td>
                         <td>

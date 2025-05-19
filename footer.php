@@ -74,16 +74,17 @@
                                     <div class="footer-widget gallery-widget">
                                         <p class="widget-title">Book Your Arts</p>
                                         <div class="widget-content footerfrm">
-                                            <form method="post" action="sms.php">
+                                            <form method="post" action="https://api.web3forms.com/submit">
+                                                <input type="hidden" name="access_key" value="8c5317b0-7959-4807-a15d-68b0d4fc6f7b">
                                                 <div class="form-group">
                                                     <input type="text" name="name" placeholder="Enter Your Name" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 &&  event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)"
                                                         required="">
                                                 </div>
                                                 <div class="form-group">
-    <input type="email" name="email" placeholder="Enter Your Email"
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-        required>
-</div>
+                                               <input type="email" name="email" placeholder="Enter Your Email"
+                                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                            required>
+                                                </div>
 
                                                 <div class="form-group">
                                                     <input type="text" name="phone" placeholder="Enter Your Mobile" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))"
@@ -168,52 +169,7 @@
         });
     </script>
 
-    <div id="sendemail" class="modal fade in" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
-                    <div class="row">
-                        <div class="col-md-12 text-center"><img src="/images/rajan-maluuja-logo.png" class="img-responsive add-popup-logo-dz">
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="e_div">
-                                <form action="sms.php" method="post" class="submit_data">
-                                    <div class="row">
-                                        <span class="error-message" id="popup-submit-error"></span>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control name" id="popup-contact-name" name="name" placeholder="Your Name*" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 &&  event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)"
-                                                    required="">
-                                                <span class="error-message" id="popup-name-error"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="tel" class="form-control mobile" id="popup-contact-phone" name="phone" placeholder="Mobile No.*" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))"
-                                                    pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required="">
-                                                <span class="error-message" id="popup-phone-error"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="tel" class="form-control mobile" id="popup-contact-phone" name="phone" placeholder="Mobile No.*" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))"
-                                                    pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required="">
-                                                <span class="error-message" id="popup-phone-error"></span>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-sm-12" align="center">
-                                            <input class="btn btn-default add-new-bg-form-button" type="submit" name="btn_enq" value="Get Instant Call Back">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+  
     <script type='text/javascript'>
         $(document).ready(function() {
             $('#sendemail').modal('hide');

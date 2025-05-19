@@ -1,4 +1,4 @@
-<?php require_once "Head.php"; ?>
+<?php require_once "head.php"; ?>
 
 <div class="page-wrapper">  
     
@@ -61,19 +61,20 @@
                         </div>
 
                         <div class="contact-form">
-                            <form method="post" action="sms.php">
+                            <form method="post" action="https://api.web3forms.com/submit">
+                                                <input type="hidden" name="access_key" value="8c5317b0-7959-4807-a15d-68b0d4fc6f7b">
                                 <div class="row">
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                         <input type="text" name="name" placeholder="Enter Your Name" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 &amp;&amp;  event.charCode < 91) || (event.charCode > 96 &amp;&amp; event.charCode < 123) || (event.charCode == 32)" required="">
                                     </div>
                                     
-                                    <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                                     <input type="text" name="phone" placeholder="Enter Your Mobile" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))" pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required="">
-                                    </div>
-
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <input type="email" name="email" placeholder="Enter Your Email" required="">
                                     </div>
+
+                                    <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                     <input type="text" name="phone" placeholder="Enter Your Mobile" onkeydown="return ( event.ctrlKey || event.altKey  || (47<event.keyCode &amp;&amp; event.keyCode<58 &amp;&amp; event.shiftKey==false) || (95<event.keyCode &amp;&amp; event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 &amp;&amp; event.keyCode<40)  || (event.keyCode==46))" pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required="">
+                                    </div>                    
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <textarea name="message" placeholder="Enter Your Message" title="Accept Only Name and Space" pattern="[A-Za-z0-9_ ]{1,150}" onkeypress="return (event.charCode > 64 &amp;&amp;  event.charCode < 91) || (event.charCode > 96 &amp;&amp; event.charCode < 123) || (event.charCode == 32)" required=""></textarea>
