@@ -42,36 +42,39 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
         <div class="auto-container">
             <div class="services-carousel owl-carousel owl-theme">
                 <?php foreach ($arts as $art): ?>
-                    <?php
+                <?php
                         // Define the base path for images
                         $baseImagePath = 'assets/uploads/';
                         $imagePath = !empty($art['art_image']) 
                             ? $baseImagePath . htmlspecialchars($art['art_image']) 
                             : 'images/defaulte.png';
                     ?>
-                    <div class='service-block'>
-                        <div class='inner-box'>
-                            <div class='image-box'>
-                                <figure class='image'>
-                                    <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>' title='<?= htmlspecialchars($art['title']) ?>'>
-                                        <img src='<?= $imagePath ?>' alt='<?= htmlspecialchars($art['title']) ?>'>
-                                    </a>
-                                </figure>
-                            </div>
-                            <div class='lower-content'>
-                                <p class='add-head-new-services-head-home'>
-                                    <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>' class='add-service-head-a'>
-                                        <?= htmlspecialchars($art['title']) ?>
-                                    </a>
-                                </p>
-                                <p class='add-highlight-name'>Rajan Maluja Arts</p>
-                                <div class='text'><?= htmlspecialchars($art['meta_description'] ?? '') ?></div>
-                                <div class='link-box'>
-                                    <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>'>Read More <i class='fa fa-long-arrow-right'></i></a>
-                                </div>
+                <div class='service-block'>
+                    <div class='inner-box'>
+                        <div class='image-box'>
+                            <figure class='image'>
+                                <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>'
+                                    title='<?= htmlspecialchars($art['title']) ?>'>
+                                    <img src='<?= $imagePath ?>' alt='<?= htmlspecialchars($art['title']) ?>'>
+                                </a>
+                            </figure>
+                        </div>
+                        <div class='lower-content'>
+                            <p class='add-head-new-services-head-home'>
+                                <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>'
+                                    class='add-service-head-a'>
+                                    <?= htmlspecialchars($art['title']) ?>
+                                </a>
+                            </p>
+                            <p class='add-highlight-name'>Rajan Maluja Arts</p>
+                            <div class='text'><?= htmlspecialchars($art['meta_description'] ?? '') ?></div>
+                            <div class='link-box'>
+                                <a href='details.php?slug=<?= htmlspecialchars($art['slug']) ?>'>Read More <i
+                                        class='fa fa-long-arrow-right'></i></a>
                             </div>
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>

@@ -20,29 +20,28 @@ $awardsDir = 'assets/uploads/awards/';
         <div class='mixitup-gallery'>
             <div class='filter-list row'>
                 <?php foreach ($awards as $award): ?>
-                    <?php 
+                <?php 
                     // Check if image exists in the database record
                     if (!empty($award['image_path'])) {
                         $imagePath = $awardsDir . basename($award['image_path']);
                     ?>
-                    <div class='project-block all mix landescape interior col-lg-4 col-md-6 col-sm-12'>
-                        <div class='image-box'>
-                            <figure class='image'>
-                                <img src='<?php echo $imagePath; ?>' alt='<?php echo htmlspecialchars($award['title']); ?>'>
-                            </figure>
-                            <div class='overlay-box'>
-                                <div class='btn-box'>
-                                    <a href='<?php echo $imagePath; ?>' 
-                                       title='<?php echo htmlspecialchars($award['title']); ?>' 
-                                       class='lightbox-image' 
-                                       data-fancybox='gallery'>
-                                        <i class='fa fa-search'></i>
-                                    </a>
-                                </div>
+                <div class='project-block all mix landescape interior col-lg-4 col-md-6 col-sm-12'>
+                    <div class='image-box'>
+                        <figure class='image'>
+                            <img src='<?php echo $imagePath; ?>' alt='<?php echo htmlspecialchars($award['title']); ?>'>
+                        </figure>
+                        <div class='overlay-box'>
+                            <div class='btn-box'>
+                                <a href='<?php echo $imagePath; ?>'
+                                    title='<?php echo htmlspecialchars($award['title']); ?>' class='lightbox-image'
+                                    data-fancybox='gallery'>
+                                    <i class='fa fa-search'></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <?php } ?>
+                </div>
+                <?php } ?>
                 <?php endforeach; ?>
             </div>
         </div>

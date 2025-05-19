@@ -6,25 +6,29 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
 ?>
 <?php require_once 'head.php'; ?>
 
-<div class="page-wrapper">  
+<div class="page-wrapper">
     <?php include 'header.php'; ?>
-	
-    <div class="form-back-drop"></div>   
+
+    <div class="form-back-drop"></div>
 
     <section class="hidden-bar">
         <div class="inner-box">
             <div class="cross-icon"><span class="fa fa-times"></span></div>
-            <div class="title"><p>BOOK YOUR ARTS</p></div>            
+            <div class="title">
+                <p>BOOK YOUR ARTS</p>
+            </div>
             <div class="appointment-form">
                 <form method="post" action="sms.php">
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Enter Your Name" pattern="[A-Za-z0-9_ ]{1,150}" required>
+                        <input type="text" name="name" placeholder="Enter Your Name" pattern="[A-Za-z0-9_ ]{1,150}"
+                            required>
                     </div>
                     <div class="form-group">
                         <input type="email" name="email" placeholder="Enter Your Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="phone" placeholder="Enter Your Mobile" pattern="[7896][0-9]{9}" minlength="10" maxlength="10" required>
+                        <input type="text" name="phone" placeholder="Enter Your Mobile" pattern="[7896][0-9]{9}"
+                            minlength="10" maxlength="10" required>
                     </div>
                     <div class="form-group">
                         <textarea name="message" placeholder="Enter Your Message" required></textarea>
@@ -41,7 +45,7 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
         <div class="auto-container">
             <div class="inner-container clearfix">
                 <div class="title-box">
-                    <h1>Youtube Studio Gallary</h1>                   
+                    <h1>Youtube Studio Gallary</h1>
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="index.php">Home</a></li>
@@ -54,14 +58,14 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
     <section class="projects-section alternate">
         <div class="auto-container">
             <div class="upper-box">
-                <div class="auto-container">    
+                <div class="auto-container">
                     <div class="sec-title text-center light">
                         <h2 class="add-more-txt-sub-head-new">Youtube Studio Gallary</h2>
                     </div>
                 </div>
-            </div>            
+            </div>
 
-            <div class="mixitup-gallery">                              
+            <div class="mixitup-gallery">
                 <div class="filter-list row maggineimages">
                     <?php foreach ($media as $row): 
                         // Extract YouTube Video ID from embed_code
@@ -78,12 +82,13 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
                             <figure class="image">
                                 <img src="<?= $thumbnail ?>" alt="<?= $caption ?>">
                             </figure>
-                            <div class="overlay-box">                                
+                            <div class="overlay-box">
                                 <div class="btn-box">
-                                    <a href="<?= $video_url ?>" title="<?= $caption ?>" class="lightbox-image" data-fancybox="gallery">
+                                    <a href="<?= $video_url ?>" title="<?= $caption ?>" class="lightbox-image"
+                                        data-fancybox="gallery">
                                         <i class="fa fa-youtube-play"></i>
                                     </a>
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,4 +98,4 @@ $media = $pdo->query("SELECT * FROM media_images")->fetchAll();
         </div>
     </section>
 
-<?php require_once "footer.php"; ?>
+    <?php require_once "footer.php"; ?>

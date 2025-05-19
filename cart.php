@@ -51,29 +51,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </tr>
                 </thead>
                 <tbody>
-                <?php $total = 0; ?>
-                <?php foreach ($cart_items as $item): ?>
+                    <?php $total = 0; ?>
+                    <?php foreach ($cart_items as $item): ?>
                     <?php $subtotal = $item['price'] * $item['quantity']; $total += $subtotal; ?>
                     <tr>
                         <td>
-                            <img src="assets/uploads/<?php echo htmlspecialchars($item['main_image']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" style="height:60px;width:auto;">
+                            <img src="assets/uploads/<?php echo htmlspecialchars($item['main_image']); ?>"
+                                alt="<?php echo htmlspecialchars($item['title']); ?>" style="height:60px;width:auto;">
                         </td>
                         <td><?php echo htmlspecialchars($item['title']); ?></td>
                         <td>₹<?php echo number_format($item['price'], 2); ?></td>
                         <td style="max-width:100px;">
-                            <input type="number" name="quantity[<?php echo $item['id']; ?>]" value="<?php echo $item['quantity']; ?>" min="1" class="form-control" style="width:80px;">
+                            <input type="number" name="quantity[<?php echo $item['id']; ?>]"
+                                value="<?php echo $item['quantity']; ?>" min="1" class="form-control"
+                                style="width:80px;">
                         </td>
                         <td>₹<?php echo number_format($subtotal, 2); ?></td>
                         <td>
                             <form method="post" style="display:inline;">
                                 <input type="hidden" name="cart_id" value="<?php echo $item['id']; ?>">
-                                <button type="submit" name="remove_item" class="btn btn-danger btn-sm" onclick="return confirm('Remove this item?');">
+                                <button type="submit" name="remove_item" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Remove this item?');">
                                     Remove
                                 </button>
                             </form>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </tbody>
                 <tfoot>
                     <tr>
@@ -89,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </form>
     <?php else: ?>
-        <div class="alert alert-info text-center">Your cart is empty.</div>
+    <div class="alert alert-info text-center">Your cart is empty.</div>
     <?php endif; ?>
 </div>
 

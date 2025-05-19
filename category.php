@@ -36,6 +36,7 @@ $paintings = $stmt->fetchAll();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,43 +50,51 @@ $paintings = $stmt->fetchAll();
             padding: 0;
             background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
         }
+
         .card {
             border-radius: 18px;
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
             border: none;
             background: #fff;
             opacity: 0;
             animation: fadeInCard 0.7s forwards;
         }
+
         .card:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
+
         .card-img-top {
             height: 220px;
             object-fit: cover;
             border-top-left-radius: 18px;
             border-top-right-radius: 18px;
         }
+
         .card-title {
             font-size: 1.1rem;
             font-weight: 600;
             color: #2d3436;
             margin-bottom: 0;
         }
+
         .card-body {
             padding: 1rem 0.5rem 0.8rem 0.5rem;
             background: #f8fafc;
         }
+
         .no-paintings {
             text-align: center;
             font-size: 20px;
             color: #888;
             margin-top: 40px;
         }
-        .btn-home, .btn-primary {
+
+        .btn-home,
+        .btn-primary {
             border-radius: 25px;
             padding: 10px 28px;
             font-weight: 500;
@@ -94,35 +103,45 @@ $paintings = $stmt->fetchAll();
             border: none;
             transition: background 0.2s;
         }
-        .btn-home:hover, .btn-primary:hover {
+
+        .btn-home:hover,
+        .btn-primary:hover {
             background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
         }
+
         @keyframes fadeInCard {
-            to { opacity: 1; }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container py-4">
         <h1 class="text-center mb-4"><?php echo htmlspecialchars($category['name']); ?></h1>
         <div class="row g-4">
             <?php if (!empty($paintings)): ?>
-                <?php foreach ($paintings as $painting): ?>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <a href="details.php?slug=<?php echo htmlspecialchars($painting['slug']); ?>" class="text-decoration-none">
-                                <img src="assets/uploads/<?php echo htmlspecialchars($painting['main_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($painting['title']); ?>" style="height:220px;object-fit:cover;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-dark"><?php echo htmlspecialchars($painting['title']); ?></h5>
-                                </div>
-                            </a>
+            <?php foreach ($paintings as $painting): ?>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm border-0">
+                    <a href="details.php?slug=<?php echo htmlspecialchars($painting['slug']); ?>"
+                        class="text-decoration-none">
+                        <img src="assets/uploads/<?php echo htmlspecialchars($painting['main_image']); ?>"
+                            class="card-img-top" alt="<?php echo htmlspecialchars($painting['title']); ?>"
+                            style="height:220px;object-fit:cover;">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-dark">
+                                <?php echo htmlspecialchars($painting['title']); ?></h5>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="col-12">
-                    <p class="no-paintings text-center fs-5 text-muted">No paintings found in this category.</p>
+                    </a>
                 </div>
+            </div>
+            <?php endforeach; ?>
+            <?php else: ?>
+            <div class="col-12">
+                <p class="no-paintings text-center fs-5 text-muted">No paintings found in this category.</p>
+            </div>
             <?php endif; ?>
         </div>
         <div class="text-center mt-4">
@@ -130,4 +149,5 @@ $paintings = $stmt->fetchAll();
         </div>
     </div>
 </body>
+
 </html>
