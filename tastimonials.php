@@ -10,7 +10,6 @@
 
              </div>
          </div>
-
          <!-- Testimonial Column -->
          <div class="testimonial-column clearfix" style="background-image: url(images/background/4.jpg);">
              <div class="inner-column">

@@ -280,7 +280,7 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                             <ul class="blog-cat">
                                 <?php foreach ($categories as $category): ?>
                                 <li>
-                                    <a href="category.php?slug=<?php echo htmlspecialchars($category['slug']); ?>">
+                                    <a href="details.php?slug=<?php echo htmlspecialchars($category['slug']); ?>">
                                         <?php echo htmlspecialchars($category['name']); ?>
                                     </a>
                                 </li>
