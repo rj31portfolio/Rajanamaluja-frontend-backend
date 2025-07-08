@@ -19,10 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove'])) {
     $stmt->execute([$user_id, $art_id]);
     redirect('wishlist.php');
 }
-?>
-
-
-    
+?>  
     <div class="container my-5 py-5">
         <h2>Your Wishlist</h2>
         <div class="art-grid">
