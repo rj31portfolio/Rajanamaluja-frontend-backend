@@ -1,6 +1,8 @@
 <?php
 require_once 'includes/functions.php';
 require_once 'includes/db.php';
+require_once 'head.php';
+require_once 'header.php';
 
 if (!isLoggedIn()) {
     redirect('login.php');
@@ -31,13 +33,13 @@ foreach ($cart_items as $item) {
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
-    <div class="container">
+
+    <div class="container my-5 py-5">
         <h2>Complete Your Payment</h2>
         <p>Total Amount: $<?php echo number_format($total_amount, 2); ?></p>
         <button id="rzp-button" class="btn">Pay Now</button>
     </div>
-    <?php include 'includes/footer.php'; ?>
+    <?php require_once 'footer.php'; ?>
     
     <script>
         console.log('Razorpay script loaded');

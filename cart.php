@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post">
         <div class="table-responsive">
             <table class="table table-bordered align-middle">
-                <thead class="table-dark">
+                <thead class="table-white text-center">
                     <tr>
                         <th>Image</th>
                         <th>Title</th>
