@@ -1,9 +1,17 @@
 <?php
-//session_start(); // Start the session at the very beginning
+session_start(); // Start the session at the very beginning
 
 require_once('head.php');
 require_once 'includes/db.php';
 
+$stmt = $pdo->query("
+    SELECT c.name AS category_name, a.slug AS art_slug 
+    FROM categories c 
+    JOIN arts a ON a.category_id = c.id 
+    WHERE a.status != 'sold_out' 
+    GROUP BY c.id 
+    ORDER BY c.name ASC
+");
 // Get the art slug from URL parameter
 $slug = isset($_GET['slug']) ? htmlspecialchars($_GET['slug']) : '';
 
@@ -76,6 +84,86 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
         color: #155724;
         border: 1px solid #c3e6cb;
         border-radius: 4px;
+    }
+    
+    /* Gallery Modal Styles */
+    .gallery-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        padding-top: 50px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.9);
+    }
+    
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+    
+    .modal-content img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .gallery-thumbnail {
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .gallery-thumbnail:hover {
+        opacity: 0.7;
+    }
+    
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.3s;
+        user-select: none;
+    }
+    
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    
+    .prev {
+        left: 0;
+        border-radius: 0 3px 3px 0;
+    }
+    
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
     }
 </style>
 <div class="page-wrapper">
@@ -198,22 +286,25 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                                     target="_blank" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
                             </div>
 
-                            <!-- Add to cart button -->
-                            <?php if ($art['stock'] > 0 && $art['status'] != 'sold_out'): ?>
-                            <div class="add-to-cart-section">
-                                <form method="post" action="add_to_cart.php" class="cart-form">
-                                    <input type="hidden" name="art_id" value="<?php echo $art['id']; ?>">
-                                    <div class="quantity-box">
-                                        <label>Quantity:</label>
-                                        <input type="number" name="quantity" value="1" min="1"
-                                            max="<?php echo $art['stock']; ?>">
-                                    </div>
-                                    <button type="submit" class="theme-btn btn-style-three">
-                                        <i class="fa fa-shopping-cart"></i> Add to Cart
-                                    </button>
-                                </form>
-                            </div>
-                            <?php endif; ?>
+                           <!-- Add to cart button -->
+<?php if ($art['stock'] > 0 && $art['status'] != 'sold_out'): ?>
+<div class="add-to-cart-section">
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></div>
+    <?php endif; ?>
+    
+    <form method="post" action="add_to_cart.php" class="cart-form">
+        <input type="hidden" name="art_id" value="<?php echo $art['id']; ?>">
+        <div class="quantity-box">
+            <label>Quantity:</label>
+            <input type="number" name="quantity" value="1" min="1" max="<?php echo $art['stock']; ?>">
+        </div>
+        <button type="submit" class="theme-btn btn-style-three">
+            <i class="fa fa-shopping-cart"></i> Add to Cart
+        </button>
+    </form>
+</div>
+<?php endif; ?>
                         </div>
                     </div>
 
@@ -257,17 +348,91 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                     <div class="art-gallery-section">
                         <h3>Gallery Images</h3>
                         <div class="row">
-                            <?php foreach ($images as $image): ?>
+                            <?php foreach ($images as $index => $image): ?>
                             <div class="col-6 col-md-4 mb-3">
                                 <div class="gallery-thumb border rounded p-2 h-100">
                                     <img src="<?php echo $baseImagePath . htmlspecialchars($image); ?>"
-                                        alt="<?php echo htmlspecialchars($art['title']); ?>" class="img-fluid w-100"
-                                        style="object-fit:Contain;max-height:220px;">
+                                        alt="<?php echo htmlspecialchars($art['title']); ?>" 
+                                        class="img-fluid w-100 gallery-thumbnail"
+                                        style="object-fit:Contain;max-height:220px;"
+                                        onclick="openModal();currentSlide(<?php echo $index + 1; ?>)">
                                 </div>
                             </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
+                    
+                    <!-- The Modal/Lightbox for Gallery Images Only -->
+                    <div id="galleryModal" class="gallery-modal">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <div class="modal-content">
+                            <?php foreach ($images as $image): ?>
+                            <div class="mySlides">
+                                <img src="<?php echo $baseImagePath . htmlspecialchars($image); ?>" style="width:100%">
+                            </div>
+                            <?php endforeach; ?>
+                            
+                            <!-- Next/previous controls -->
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+                    </div>
+                    
+                    <script>
+                    // Open the Modal
+                    function openModal() {
+                        document.getElementById("galleryModal").style.display = "block";
+                    }
+                    
+                    // Close the Modal
+                    function closeModal() {
+                        document.getElementById("galleryModal").style.display = "none";
+                    }
+                    
+                    var slideIndex = 1;
+                    showSlides(slideIndex);
+                    
+                    // Next/previous controls
+                    function plusSlides(n) {
+                        showSlides(slideIndex += n);
+                    }
+                    
+                    // Thumbnail image controls
+                    function currentSlide(n) {
+                        showSlides(slideIndex = n);
+                    }
+                    
+                    function showSlides(n) {
+                        var i;
+                        var slides = document.getElementsByClassName("mySlides");
+                        if (n > slides.length) {slideIndex = 1}
+                        if (n < 1) {slideIndex = slides.length}
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        slides[slideIndex-1].style.display = "block";
+                    }
+                    
+                    // Close modal when clicking outside of image
+                    document.getElementById('galleryModal').addEventListener('click', function(e) {
+                        if (e.target === this) {
+                            closeModal();
+                        }
+                    });
+                    
+                    // Keyboard navigation
+                    document.addEventListener('keydown', function(event) {
+                        if (document.getElementById("galleryModal").style.display === "block") {
+                            if (event.key === 'Escape') {
+                                closeModal();
+                            } else if (event.key === 'ArrowLeft') {
+                                plusSlides(-1);
+                            } else if (event.key === 'ArrowRight') {
+                                plusSlides(1);
+                            }
+                        }
+                    });
+                    </script>
                     <?php endif; ?>
                 </div>
 
@@ -277,15 +442,15 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                         <!-- Categories Widget -->
                         <div class="sidebar-widget sidebar-blog-category">
                             <h3 class="sidebar-title text-light">Our Services</h3>
-                            <ul class="blog-cat">
-                                <?php foreach ($categories as $category): ?>
-                                <li>
-                                    <a href="details.php?slug=<?php echo htmlspecialchars($category['slug']); ?>">
-                                        <?php echo htmlspecialchars($category['name']); ?>
-                                    </a>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
+                         <ul class="blog-cat">
+        <?php foreach ($servicesDropdown as $row): ?>
+            <li>
+                <a href="<?php echo BASE_URL; ?>details.php?slug=<?php echo htmlspecialchars($row['art_slug']); ?>">
+                    <?php echo htmlspecialchars($row['category_name']); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
                         </div>
 
                         <!-- Enquiry Form Widget -->
@@ -293,10 +458,9 @@ $mainImage2 = !empty($art['main_image_2']) ? $baseImagePath . htmlspecialchars($
                             <h3 class="sidebar-title">Enquire Now</h3>
                             <form method="post" action="sms.php" class="enquiry-form">
                                 <?php
-                               // session_start(); // Start the session to access the success message
                                 if (isset($_SESSION['success'])) {
                                     echo "<div class='alert alert-success' style='margin-bottom: 20px;'>" . htmlspecialchars($_SESSION['success']) . "</div>";
-                                    unset($_SESSION['success']); // Clear the message after displaying it
+                                    unset($_SESSION['success']);
                                 }
                                 ?>
                                 <div class="form-group">

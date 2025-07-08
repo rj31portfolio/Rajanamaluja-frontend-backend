@@ -1,14 +1,28 @@
 <?php
 require_once 'includes/db.php';
 require_once 'includes/functions.php';
+// Fetch categories with at least one art and their first/latest art slug
+$stmt = $pdo->query("
+    SELECT c.name AS category_name, a.slug AS art_slug 
+    FROM categories c 
+    JOIN arts a ON a.category_id = c.id 
+    WHERE a.status != 'sold_out' 
+    GROUP BY c.id 
+    ORDER BY c.name ASC
+");
 
-// Fetch all categories for "Our Services"
-$stmt = $pdo->query("SELECT name, slug FROM categories ORDER BY name ASC");
-$categories = $stmt->fetchAll();
+$servicesDropdown = $stmt->fetchAll();
+
+// Fetch all active arts for "Our Services" dropdown
+$stmt = $pdo->query("SELECT title, slug FROM arts WHERE status != 'sold_out' ORDER BY title ASC");
+$servicesArts = $stmt->fetchAll();
+
 
 // Fetch only 10 categories for "Shop Category"
 $shopCategoriesStmt = $pdo->query("SELECT name, slug FROM categories ORDER BY id DESC LIMIT 10");
 $shopCategories = $shopCategoriesStmt->fetchAll();
+
+$slug = isset($_GET['slug']) ? htmlspecialchars($_GET['slug']) : '';
 ?>
 
 <header class="main-header header-style-one">
@@ -44,17 +58,18 @@ $shopCategories = $shopCategoriesStmt->fetchAll();
                                 <li><a href="<?php echo BASE_URL; ?>about.php">About Us</a></li>
 
                                 <li class="dropdown">
-                                    <a href="#">Our Services</a>
-                                    <ul>
-                                        <?php foreach ($categories as $category): ?>
-                                            <li>
-                                                <a href="<?php echo BASE_URL; ?>category.php?slug=<?php echo htmlspecialchars($category['slug']); ?>">
-                                                    <?php echo htmlspecialchars($category['name']); ?>
-                                                </a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </li>
+    <a href="#">Our Services</a>
+    <ul>
+        <?php foreach ($servicesDropdown as $row): ?>
+            <li>
+                <a href="<?php echo BASE_URL; ?>details.php?slug=<?php echo htmlspecialchars($row['art_slug']); ?>">
+                    <?php echo htmlspecialchars($row['category_name']); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</li>
+
 
                                 <li><a href="<?php echo BASE_URL; ?>video-Gallary.php">Video Gallery</a></li>
                                 <li><a href="<?php echo BASE_URL; ?>contact-us.php">Contact Us</a></li>

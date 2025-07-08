@@ -1,5 +1,10 @@
+
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    ob_start(); // Prevent headers already sent
+    session_start();
+}
+
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 
@@ -24,21 +29,21 @@ function uploadImage($file, $folder) {
     $fileName = uniqid() . '_' . basename($file['name']);
     $targetFile = $targetDir . $fileName;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-    
+
     // Validate file
     $check = getimagesize($file['tmp_name']);
     if ($check === false) {
         return false;
     }
-    
+
     if ($file['size'] > 5000000) { // 5MB limit
         return false;
     }
-    
+
     if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
         return false;
     }
-    
+
     if (move_uploaded_file($file['tmp_name'], $targetFile)) {
         return $folder . '/' . $fileName;
     }
@@ -62,24 +67,24 @@ function makeCurlRequest($url, $method, $data, $key_id, $key_secret) {
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_setopt($ch, CURLOPT_USERPWD, "$key_id:$key_secret");
-    
+
     if ($method === 'POST') {
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
     }
-    
+
     $response = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $error = curl_error($ch);
     curl_close($ch);
-    
+
     if ($error) {
         file_put_contents('razorpay_log.txt', date('Y-m-d H:i:s') . ' - cURL Error: ' . $error . PHP_EOL, FILE_APPEND);
         return ['error' => true, 'message' => 'cURL error: ' . $error];
     }
-    
+
     $result = json_decode($response, true);
-    
+
     if ($http_code >= 200 && $http_code < 300) {
         return $result;
     }
